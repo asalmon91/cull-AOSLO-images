@@ -21,9 +21,7 @@ function varargout = cull_images(varargin)
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
 % Edit the above text to modify the response to help cull_images
-
-% Last Modified by GUIDE v2.5 02-Aug-2018 13:36:35
-% Last Modified by GUIDE v2.5 02-Aug-2018 14:03:18
+% Last Modified by GUIDE v2.5 11-Jan-2019 16:24:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -571,7 +569,7 @@ function batch_go_btn_Callback(hObject, eventdata, handles)
 min_ht      = str2double(get(handles.min_ht_txt, 'string'));
 min_wd      = str2double(get(handles.min_wd_txt, 'string'));
 min_frames  = str2double(get(handles.min_nframes_txt, 'string'));
-min_cropped = 1; % by default
+min_cropped = get(handles.crop1_cb, 'value'); % by default
 
 % shortcuts
 imgs = handles.imgs;
@@ -589,7 +587,9 @@ imgs(:, strcmp(handles.img_header, 'decisions')) = ...
     cellstr(repmat('undecided', size(imgs, 1), 1));
 
 % Then figure out which ones are rejected by the new criteria
-rejected = hts < min_ht | wds < min_wd | nframes < min_frames | cropped <= min_cropped;
+rejected = hts < min_ht | wds < min_wd | ...
+    nframes < min_frames | cropped <= min_cropped;
+
 imgs(rejected, strcmp(handles.img_header, 'decisions')) = ...
     cellstr(repmat('rejected', numel(find(rejected)), 1));
 handles.imgs = imgs;
@@ -1020,3 +1020,12 @@ function reject_btn_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 set(hObject, 'tooltip', char(8592))
+
+
+% --- Executes on button press in crop1_cb.
+function crop1_cb_Callback(hObject, eventdata, handles)
+% hObject    handle to crop1_cb (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of crop1_cb
