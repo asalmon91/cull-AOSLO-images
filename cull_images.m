@@ -21,7 +21,6 @@ function varargout = cull_images(varargin)
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
 % Edit the above text to modify the response to help cull_images
-
 % Last Modified by GUIDE v2.5 11-Jan-2019 16:24:13
 
 % Begin initialization code - DO NOT EDIT
