@@ -22,11 +22,8 @@ function varargout = cull_images(varargin)
 
 % Edit the above text to modify the response to help cull_images
 
-<<<<<<< HEAD:cull_images.m
 % Last Modified by GUIDE v2.5 02-Aug-2018 13:36:35
-=======
 % Last Modified by GUIDE v2.5 02-Aug-2018 14:03:18
->>>>>>> ca132bb3e55f772306f2bb27fa498e45fda74dbd:cull_images.m
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
