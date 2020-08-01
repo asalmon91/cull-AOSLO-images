@@ -7,8 +7,8 @@ path_i = strcmp(handles.img_header, 'path');
 fname_i = strcmp(handles.img_header, 'fname');
 
 % get mod
-mods = get(handles.modality_listbox, 'string');
-mod  = mods{get(handles.modality_listbox, 'value')};
+mods = get(handles.modality_listbox, 'items');
+mod  = get(handles.modality_listbox, 'value');
 
 loadedImgs = cell(numel(fnames), numel(mods));
 for ii=1:numel(fnames)

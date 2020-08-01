@@ -9,7 +9,7 @@ img_header  = handles.img_header;
 % Determine total progress
 total_progress = numel(find(~strcmp(imgs(:, strcmp(img_header, 'decisions')), 'undecided'))) / ...
     size(imgs, 1) * 100;
-set(handles.prog_title, 'string', sprintf('Progress: %3.1f%s', total_progress, '%'));
+set(handles.prog_title, 'text', sprintf('Progress: %3.1f%s', total_progress, '%'));
 
 % For all unique video numbers, figure out the proportion not undecided to total
 [nums, ~, I] = unique(cell2mat(imgs(:, strcmp(img_header, 'num'))));
@@ -26,7 +26,7 @@ end
 prog_strings(~cellfun(@isempty, strfind(prog_strings, '100.0%'))) = [];
 
 % Update progress list
-set(handles.prog_list, 'string', prog_strings);
+set(handles.prog_list, 'items', prog_strings);
 
 end
 

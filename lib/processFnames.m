@@ -1,4 +1,4 @@
-function [imgs, img_header] = processFnames( imgs, handles )
+function [imgs, img_header] = processFnames( imgs, app )
 %processFnames extracts important information from the images, e.g., size, ssr/fr, nframes
 % (todo) imgs should be objects, not a cell array. Changing this will require changing every other
 % module, so this won't happen for a while.
@@ -9,8 +9,8 @@ wb.Children.Title.Interpreter = 'none';
 waitbar(0, wb, sprintf('Reading %s...', imgs{1}));
 
 % Build header for image data
-if isfield(handles, 'img_header')
-    img_header = handles.img_header;
+if isfield(app, 'img_header')
+    img_header = app.img_header;
 else
     img_header = {'fname', 'path', 'num', 'wd', 'ht', 'nframes', 'cropped', 'srffr', 'decisions'};
 end
@@ -47,14 +47,27 @@ for ii=1:size(imgs, 1)
     % number
     imgs{ii, num_i} = str2double(nameparts{find(strcmp(nameparts, 'ref'))-1});
     % nframes
-    imgs{ii, nframes_i} = str2double(nameparts{find(strcmp(nameparts, 'n'))+1});
+	try
+		imgs{ii, nframes_i} = str2double(nameparts{find(strcmp(nameparts, 'n'))+1});
+	catch
+		warning('Failed to determine number of frames for %s', img_name);
+		imgs{ii, nframes_i} = 1;
+	end
     % cropped
-    imgs{ii, cropped_i} = str2double(nameparts{find(strcmp(nameparts, 'cropped'))+1});
+	try
+		imgs{ii, cropped_i} = str2double(nameparts{find(strcmp(nameparts, 'cropped'))+1});
+	catch
+		warning('Failed to determine cropped frames for %s', img_name);
+		imgs{ii, cropped_i} = 1;
+	end
     % sr/ffr
     if any(strcmp(nameparts, 'sr'))
         imgs{ii, srffr_i} = 'sr';
     elseif any(strcmp(nameparts, 'ffr'))
         imgs{ii, srffr_i} = 'ffr';
+	else
+		warning('Failed to determine registration method for %s', img_name);
+		imgs{ii, srffr_i} = 'ffr';
     end
     imgs{ii, decision_i} = 'undecided';
     
