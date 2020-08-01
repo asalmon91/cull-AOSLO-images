@@ -25,7 +25,13 @@ for ii=1:numel(missingImages)
 end
 
 % Update list
-set(handles.missing_list, 'string', num2str(avi_nums(missingImages)));
+missing_list = num2str(avi_nums(missingImages));
+if isempty(missing_list)
+	set(handles.missing_list, 'items', {});
+else
+	set(handles.missing_list, 'items', mat2cell(missing_list, ones(size(missing_list))));
+end
+
 
 end
 
