@@ -8,4 +8,4 @@ Fun fact, the example data is from the northern tree shrew (<i>Tupaia belangeri<
 Known bugs:
 - Mini-montage function not working properly, disabled for now
 
-Note: Maintenance is scheduled for ≥ 01/2021 (finishing up the PhD)
+Note: Feedback is greatly appreciated, but maintenance is scheduled for ≥ 01/2021 (finishing up the PhD)
